@@ -184,24 +184,24 @@ if(!class_exists('BC_CF7_Signup')){
                     $message .= ' ' . $contact_form->message('mail_sent_ok');
                     $submission->set_response(wp_strip_all_tags($message));
                     $submission->set_status('mail_sent');
-                    $notify = bc_cf7()->pref('bc_notify', $contact_form);
-                    switch($notify){
-                        case 'admin':
-                            wp_new_user_notification($user_id, null, 'admin');
-                            break;
-                        case 'both':
-                            if($generated_password){
-                                wp_new_user_notification($user_id, null, 'both');
-                            } else {
-                                wp_new_user_notification($user_id, null, 'admin');
-                            }
-                            break;
-                    }
                 } else {
                     $message .= ' ' . $contact_form->message('mail_sent_ng');
                     $submission->set_response(wp_strip_all_tags($message));
                     $submission->set_status('mail_failed');
                 }
+            }
+            $notify = bc_cf7()->pref('bc_notify', $contact_form);
+            switch($notify){
+                case 'admin':
+                    wp_new_user_notification($user_id, null, 'admin');
+                    break;
+                case 'both':
+                    if($generated_password){
+                        wp_new_user_notification($user_id, null, 'both');
+                    } else {
+                        wp_new_user_notification($user_id, null, 'admin');
+                    }
+                    break;
             }
             bc_cf7()->update($contact_form, $submission, 'user', $user_id);
             do_action('bc_cf7_signup', $user_id, $contact_form, $submission);

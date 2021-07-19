@@ -202,6 +202,11 @@ if(!class_exists('BC_CF7_Signup')){
                         wp_new_user_notification($user_id, null, 'admin');
                     }
                     break;
+                case 'user':
+                    if($generated_password){
+                        wp_new_user_notification($user_id, null, 'admin');
+                    }
+                    break;
             }
             bc_cf7()->update($contact_form, $submission, 'user', $user_id);
             do_action('bc_cf7_signup', $user_id, $contact_form, $submission);

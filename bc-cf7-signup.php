@@ -12,7 +12,7 @@ Plugin URI: https://github.com/beavercoffee/bc-cf7-signup
 Requires at least: 5.7
 Requires PHP: 5.6
 Text Domain: bc-cf7-signup
-Version: 1.7.18.2
+Version: 1.7.19
 */
 
 if(defined('ABSPATH')){
